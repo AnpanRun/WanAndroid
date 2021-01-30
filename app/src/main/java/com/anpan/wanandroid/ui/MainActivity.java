@@ -1,8 +1,10 @@
-package com.anpan.wanandroid;
+package com.anpan.wanandroid.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.anpan.wanandroid.R;
 
 public class MainActivity extends AppCompatActivity {
 
