@@ -1,13 +1,12 @@
 package com.anpan.wanandroid.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-
 import android.os.Bundle;
 
 import com.anpan.wanandroid.R;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         indexFragment = IndexFragment.newInstance();
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fl_main,indexFragment);
+        transaction.replace(R.id.fl_main, indexFragment);
         transaction.commit();
     }
 

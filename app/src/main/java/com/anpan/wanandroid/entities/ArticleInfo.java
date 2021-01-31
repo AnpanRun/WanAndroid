@@ -48,13 +48,13 @@ public class ArticleInfo {
 
     private String projectLink;
 
-    private int publishTime;
+    private double publishTime;
 
     private int realSuperChapterId;
 
     private int selfVisible;
 
-    private int shareDate;
+    private double shareDate;
 
     private String shareUser;
 
@@ -194,12 +194,7 @@ public class ArticleInfo {
     public String getProjectLink(){
         return this.projectLink;
     }
-    public void setPublishTime(int publishTime){
-        this.publishTime = publishTime;
-    }
-    public int getPublishTime(){
-        return this.publishTime;
-    }
+
     public void setRealSuperChapterId(int realSuperChapterId){
         this.realSuperChapterId = realSuperChapterId;
     }
@@ -212,18 +207,30 @@ public class ArticleInfo {
     public int getSelfVisible(){
         return this.selfVisible;
     }
-    public void setShareDate(int shareDate){
-        this.shareDate = shareDate;
-    }
-    public int getShareDate(){
-        return this.shareDate;
-    }
     public void setShareUser(String shareUser){
         this.shareUser = shareUser;
     }
     public String getShareUser(){
         return this.shareUser;
     }
+
+
+    public double getPublishTime() {
+        return publishTime;
+    }
+
+    public void setPublishTime(double publishTime) {
+        this.publishTime = publishTime;
+    }
+
+    public double getShareDate() {
+        return shareDate;
+    }
+
+    public void setShareDate(double shareDate) {
+        this.shareDate = shareDate;
+    }
+
     public void setSuperChapterId(int superChapterId){
         this.superChapterId = superChapterId;
     }
@@ -271,6 +278,18 @@ public class ArticleInfo {
     }
     public int getZan(){
         return this.zan;
+    }
+
+    public boolean isCanEdit() {
+        return canEdit;
+    }
+
+    public boolean isCollect() {
+        return collect;
+    }
+
+    public boolean isFresh() {
+        return fresh;
     }
 
     class Tags {

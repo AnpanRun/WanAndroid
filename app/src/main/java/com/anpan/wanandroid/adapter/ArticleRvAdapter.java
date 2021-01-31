@@ -37,9 +37,14 @@ public class ArticleRvAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder vh = (ViewHolder) holder;
         ArticleInfo articleInfo = listItem.get(position);
+        if (articleInfo.getAuthor().equals("")) {
+            vh.mTvAuthor.setText(articleInfo.getShareUser());
+        } else {
+            vh.mTvAuthor.setText(articleInfo.getAuthor());
+        }
+
         vh.mTvTitle.setText(articleInfo.getTitle());
-        vh.mTvAuthor.setText(articleInfo.getAuthor());
-        vh.mTvTime.setText(articleInfo.getPublishTime() +" ");
+        vh.mTvTime.setText(articleInfo.getNiceShareDate());
     }
 
     @Override
@@ -54,7 +59,7 @@ public class ArticleRvAdapter extends RecyclerView.Adapter {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mTvTitle = itemView.findViewById(R.id.tv_articlinfo_time);
+            mTvTitle = itemView.findViewById(R.id.tv_articlinfo_title);
             mTvAuthor = itemView.findViewById(R.id.tv_articlinfo_author);
             mTvTime = itemView.findViewById(R.id.tv_articlinfo_time);
         }

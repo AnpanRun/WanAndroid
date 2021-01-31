@@ -1,14 +1,6 @@
 package com.anpan.wanandroid.ui;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +12,13 @@ import com.anpan.wanandroid.vm.ArticleInfoListVM;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class IndexFragment extends Fragment {
 
@@ -49,7 +48,7 @@ public class IndexFragment extends Fragment {
             }
         });
 
-        aInfoListVm.getArticleInfoListLiveData().observe(getActivity(), new Observer<List<ArticleInfo>>() {
+        aInfoListVm.getArticleListLiveData().observe(getActivity(), new Observer<List<ArticleInfo>>() {
             @Override
             public void onChanged(List<ArticleInfo> articleInfos) {
                 if(articleRvAdapter == null) {
@@ -83,6 +82,6 @@ public class IndexFragment extends Fragment {
     }
 
     public void getData() {
-        aInfoListVm.getArticleInfoListLiveData();
+        aInfoListVm.getArticleInfos();
     }
 }
