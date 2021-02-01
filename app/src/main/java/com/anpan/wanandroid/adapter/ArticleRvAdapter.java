@@ -1,6 +1,8 @@
 package com.anpan.wanandroid.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 
 import com.anpan.wanandroid.R;
 import com.anpan.wanandroid.entities.ArticleInfo;
+import com.anpan.wanandroid.ui.WebViewActivity;
 
 import java.util.ArrayList;
 
@@ -20,10 +23,12 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ArticleRvAdapter extends RecyclerView.Adapter {
     private LayoutInflater inflater;
     private ArrayList<ArticleInfo> listItem;
+    private Context context;
 
     public ArticleRvAdapter(Context context, ArrayList<ArticleInfo> listItem) {
         inflater = LayoutInflater.from(context);
         this.listItem = listItem;
+        this.context = context;
     }
 
     @NonNull
@@ -35,6 +40,7 @@ public class ArticleRvAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        Log.d("lbbb",position+"");
         ViewHolder vh = (ViewHolder) holder;
         ArticleInfo articleInfo = listItem.get(position);
         if (articleInfo.getAuthor().equals("")) {
@@ -45,6 +51,12 @@ public class ArticleRvAdapter extends RecyclerView.Adapter {
 
         vh.mTvTitle.setText(articleInfo.getTitle());
         vh.mTvTime.setText(articleInfo.getNiceShareDate());
+        vh.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, WebViewActivity.class).putExtra("url",articleInfo.getLink()));
+            }
+        });
     }
 
     @Override
