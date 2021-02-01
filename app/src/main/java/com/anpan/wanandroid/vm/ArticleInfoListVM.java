@@ -2,10 +2,10 @@ package com.anpan.wanandroid.vm;
 
 import com.anpan.wanandroid.entities.ArticleInfo;
 import com.anpan.wanandroid.entities.ArticleInfosResponse;
-import com.anpan.wanandroid.entities.ResponseModel;
 import com.anpan.wanandroid.net.CommonCallback;
 import com.anpan.wanandroid.repositories.ArticleInfoRepo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
@@ -26,13 +26,19 @@ public class ArticleInfoListVM extends ViewModel {
         loadingLiveData = new MutableLiveData<>();
     }
 
-    public void getArticleInfos() {
+    public void getArticleInfos(int page ,boolean isAdd) {
 
-        ArticleInfoRepo.getArticleInfoRepo().getArticleInfoFromServer(new CommonCallback<ArticleInfosResponse>() {
+        ArticleInfoRepo.getArticleInfoRepo().getArticleInfoFromServer(page ,new CommonCallback<ArticleInfosResponse>() {
 
             @Override
             public void onSuccess(ArticleInfosResponse data) {
-                articleInfoListLiveData.setValue(data.getDatas());
+                if(isAdd) {
+                    ArrayList<ArticleInfo> articleInfoArrayList = (ArrayList<ArticleInfo>) articleInfoListLiveData.getValue();
+                    articleInfoArrayList.addAll(data.getDatas());
+                    articleInfoListLiveData.setValue(articleInfoArrayList);
+                }else {
+                    articleInfoListLiveData.setValue(data.getDatas());
+                }
             }
 
             @Override
@@ -40,6 +46,22 @@ public class ArticleInfoListVM extends ViewModel {
 
             }
         });
+    }
+
+    /**
+     * 获取第page页的文字列表
+     * @param page
+     */
+    public void getArticleInfos(int page) {
+        getArticleInfos(page , false);
+    }
+
+    /**
+     * 把第page页加入到文章列表中
+     * @param page
+     */
+    public void addToAInfoList(int page){
+        getArticleInfos(page , true);
     }
 
     public LiveData<List<ArticleInfo>> getArticleListLiveData() {

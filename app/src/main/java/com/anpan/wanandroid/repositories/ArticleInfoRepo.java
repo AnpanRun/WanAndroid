@@ -33,13 +33,18 @@ public class ArticleInfoRepo {
 
     }
 
-    public void getArticleInfoFromServer(CommonCallback callback) {
+    public void getArticleInfoFromServer(int page , CommonCallback callback) {
+        if (page < 1) {
+            page = 0;
+        } else {
+            page--;
+        }
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://www.wanandroid.com/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
 
         NetRequestInterface request = retrofit.create(NetRequestInterface.class);
 
-        Call<ResponseModel<ArticleInfosResponse>> call = request.getArticleInfos(0);
+        Call<ResponseModel<ArticleInfosResponse>> call = request.getArticleInfos(page);
         call.enqueue(new Callback<ResponseModel<ArticleInfosResponse>>() {
             @Override
             public void onResponse(Call<ResponseModel<ArticleInfosResponse>> call, Response<ResponseModel<ArticleInfosResponse>> response) {
