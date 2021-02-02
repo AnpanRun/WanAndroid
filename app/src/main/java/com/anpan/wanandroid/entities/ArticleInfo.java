@@ -1,12 +1,13 @@
 package com.anpan.wanandroid.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 首页文章列表信息
  * Created by AnpanRun on 2021/1/30.
  */
-public class ArticleInfo {
+public class ArticleInfo implements Serializable {
 
     private String apkLink;
 

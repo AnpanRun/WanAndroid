@@ -28,7 +28,7 @@ public class ArticleInfoListVM extends ViewModel {
 
     public void getArticleInfos(int page ,boolean isAdd) {
 
-        ArticleInfoRepo.getArticleInfoRepo().getArticleInfoFromServer(page ,new CommonCallback<ArticleInfosResponse>() {
+        ArticleInfoRepo.getInstance().getArticleInfoFromServer(page ,new CommonCallback<ArticleInfosResponse>() {
 
             @Override
             public void onSuccess(ArticleInfosResponse data) {

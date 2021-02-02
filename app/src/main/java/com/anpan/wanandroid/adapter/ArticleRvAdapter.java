@@ -38,7 +38,7 @@ public class ArticleRvAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = null;
-        RecyclerView.ViewHolder viewHolder= null;
+        RecyclerView.ViewHolder viewHolder = null;
         switch (viewType) {
             case ITEM_DATA:
                 itemView = inflater.inflate(R.layout.rv_articleinfo, null);
@@ -59,9 +59,9 @@ public class ArticleRvAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof DataViewHolder) {
-            DataViewHolder vh = (DataViewHolder)holder;
+            DataViewHolder vh = (DataViewHolder) holder;
             ArticleInfo articleInfo = listItem.get(position);
-            if (articleInfo.getAuthor().equals("") || articleInfo.getAuthor()==null) {
+            if (articleInfo.getAuthor() == null || articleInfo.getAuthor().equals("")) {
                 vh.mTvAuthor.setText(articleInfo.getShareUser());
             } else {
                 vh.mTvAuthor.setText(articleInfo.getAuthor());

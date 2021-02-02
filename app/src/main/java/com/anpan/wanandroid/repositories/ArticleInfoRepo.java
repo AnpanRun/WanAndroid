@@ -1,5 +1,6 @@
 package com.anpan.wanandroid.repositories;
 
+import com.anpan.wanandroid.net.URL;
 import com.anpan.wanandroid.entities.ArticleInfosResponse;
 import com.anpan.wanandroid.entities.ResponseModel;
 import com.anpan.wanandroid.net.CommonCallback;
@@ -18,7 +19,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ArticleInfoRepo {
     private static ArticleInfoRepo articleInfoRepo;
 
-    public static ArticleInfoRepo getArticleInfoRepo() {
+    //懒汉模式单例
+    public static ArticleInfoRepo getInstance() {
         if (articleInfoRepo == null) {
             synchronized (ArticleInfoRepo.class) {
                 if (articleInfoRepo == null) {
@@ -33,13 +35,13 @@ public class ArticleInfoRepo {
 
     }
 
-    public void getArticleInfoFromServer(int page , CommonCallback callback) {
+    public void getArticleInfoFromServer(int page, CommonCallback callback) {
         if (page < 1) {
             page = 0;
         } else {
             page--;
         }
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://www.wanandroid.com/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(URL.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create()).build();
 
         NetRequestInterface request = retrofit.create(NetRequestInterface.class);
