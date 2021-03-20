@@ -2,6 +2,7 @@ package com.anpan.wanandroid.net;
 
 
 import com.anpan.wanandroid.entities.ArticleInfosResponse;
+import com.anpan.wanandroid.entities.BannerInfo;
 import com.anpan.wanandroid.entities.ResponseModel;
 import com.anpan.wanandroid.entities.WxAuthor;
 
@@ -27,4 +28,8 @@ public interface NetRequestInterface {
     //人物文章详细列表
     @GET("wxarticle/list/{id}/{page}/json")
     Call<ResponseModel<ArticleInfosResponse>> getWxArticleInfos(@Path("id") int id, @Path("page") int page);
+    
+    //首页Banner详细
+    @GET("/banner/json")
+    Call<ResponseModel<List<BannerInfo>>> getBannerInfo();
 }

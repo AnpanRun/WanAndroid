@@ -16,6 +16,7 @@ import java.util.List;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 /**
@@ -24,6 +25,7 @@ import androidx.viewpager2.widget.ViewPager2;
 public class WxFragment extends Fragment {
 
     private WxViewModel wxViewModel;
+    private ViewModelProvider wxVMProvider;
     private TabLayout mTbWxAuthors;
     private ViewPager2 mVpWxFrg;
     private List<Fragment> fragments;

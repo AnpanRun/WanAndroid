@@ -1,14 +1,18 @@
 package com.anpan.wanandroid.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.anpan.wanandroid.R;
 import com.anpan.wanandroid.adapter.ArticleRvAdapter;
 import com.anpan.wanandroid.entities.ArticleInfo;
+import com.anpan.wanandroid.entities.BannerInfo;
 import com.anpan.wanandroid.vm.ArticleInfoListVM;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +34,7 @@ public class IndexFragment extends Fragment {
     private ArticleRvAdapter articleRvAdapter;
     private int lastLoadDataItemPosition;
     private int page;
+    private ImageView mIvBanner;
 
     public IndexFragment() {
     }
@@ -42,6 +47,7 @@ public class IndexFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("AnpanRun","onChanged  onCreate");
         initViewModel();
         observeLivaData();
         page = 1;
@@ -51,6 +57,13 @@ public class IndexFragment extends Fragment {
         aInfoListVm.getLoadingLiveData().observe(getActivity(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
+            }
+        });
+
+        aInfoListVm.getBannerLiveData().observe(getActivity(), new Observer<List<BannerInfo>>() {
+            @Override
+            public void onChanged(List<BannerInfo> bannerInfos) {
+                Glide.with(getActivity()).load(bannerInfos.get(0).getImagePath()).into(mIvBanner);
             }
         });
 
@@ -100,17 +113,40 @@ public class IndexFragment extends Fragment {
                 }
             }
         });
+
+        mIvBanner = (ImageView)view.findViewById(R.id.iv_banner);
         return view;
     }
 
     @Override
     public void onResume() {
+        Log.d("AnpanRun","onResume:" +  page);
+
         super.onResume();
         getData(page);
     }
 
     public void getData(int page) {
         aInfoListVm.getArticleInfos(page);
+        aInfoListVm.getBanner();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("AnpanRun","index fragment destory view");
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d("AnpanRun","index fragment destory");
+
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDetach() {
+        Log.d("AnpanRun","index fragment destory view");
+        super.onDetach();
+    }
 }

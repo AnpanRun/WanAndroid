@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class WxRepo {
     //饿汉模式 单例
-    private static WxRepo wxRepo = new WxRepo();
+    private static volatile WxRepo wxRepo = new WxRepo();
 
     private WxRepo() {
     }

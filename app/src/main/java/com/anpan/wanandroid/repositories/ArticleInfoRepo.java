@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by AnpanRun on 2021/1/30.
  */
 public class ArticleInfoRepo {
-    private static ArticleInfoRepo articleInfoRepo;
+    private static volatile ArticleInfoRepo articleInfoRepo;
 
     //懒汉模式单例
     public static ArticleInfoRepo getInstance() {
